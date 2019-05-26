@@ -28,6 +28,11 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
     line-height: 1;
+    font-family: 'Ubuntu';
+    height: 100%;
+    
+    display: flex;
+    flex-direction: column;
   }
   ol, ul {
     list-style: none;
@@ -44,6 +49,34 @@ const GlobalStyle = createGlobalStyle`
     border-collapse: collapse;
     border-spacing: 0;
 }
+
+  html {
+    height: 100%;
+  }
+
+  /* react animation */
+  .my-icon-enter {
+    width: 0;
+  }
+
+  .my-icon-enter-active {
+    width: fit-content;
+    transition: .2s;
+  }
+
+  .my-icon-exit {
+    width: fit-content;
+  }
+
+  .my-icon-exit-active {
+    width: 0;
+    transition: .2s;
+  }
+
+  .t-ativo {
+    background: red;
+  }
 `;
+
 
 export default GlobalStyle;

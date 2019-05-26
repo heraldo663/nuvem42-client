@@ -1,9 +1,12 @@
 import React from "react";
+import {BackgroundH, Title, Bmenu} from './styles';
+import BurguerMenu from './menu/BurguerMenu';
 
 export default function Header() {
   return (
-    <div>
-      <h3>Header</h3>
-    </div>
+    <BackgroundH>
+      <BurguerMenu />
+      <Title>Nuvem 42</Title>
+    </BackgroundH>
   );
 }

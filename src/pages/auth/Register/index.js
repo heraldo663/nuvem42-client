@@ -1,11 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
+import {LoginPage , LoginBox, LoginImg, LoginH1, LoginForm, LoginInput, LoginButton, LoginCheck, Teste1} from './styles';
+// import Undraw from 'react-undraw';
+import { ReactComponent as Logo } from './ilustracao.svg';
+import { NavLink } from 'react-router-dom';
+   
 
-function Register() {
+function Login() {
+
+  const [unout,  setInput ] = useState({
+    email: '',
+    senha: ''
+  });
+
+
+  function handeEmail(e){
+    console.log(e)
+    setInput({
+      email: e.target.value
+    });
+  }
+
   return (
-    <div>
-      <h2>Register</h2>
-    </div>
+    <LoginPage>
+      <LoginImg >
+        <Logo />
+      </LoginImg>
+      <LoginBox>
+        <LoginH1>Registro</LoginH1>
+        <LoginForm>
+          <LoginInput 
+            type="text"
+            placeholder="Username"
+          />
+          <LoginInput 
+            type="text"
+            placeholder="E-mail"
+            onChange={handeEmail}
+          />
+          <LoginInput 
+            type="text"
+            placeholder="Senha"
+          />
+          <LoginCheck>
+            <input type="checkbox" name="remember" value="true" /> <span>Lembrar-se</span>
+          </LoginCheck> 
+          <LoginButton>
+            Entrar
+          </LoginButton>
+          {unout.email}
+        </LoginForm>
+      </LoginBox>
+      <NavLink to="/" activeClassName="is-active" exact={true}>Login</NavLink>
+    </LoginPage>
   );
 }
 
-export default Register;
+export default Login;
