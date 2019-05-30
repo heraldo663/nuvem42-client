@@ -11,10 +11,13 @@
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.0",
     "react-transition-group": "^4.0.1",
-    "react-undraw": "^1.14.0",
     "redux": "^4.0.1",
     "redux-saga": "^1.0.2",
-    "styled-components": "^4.2.0"
+    "styled-components": "^4.2.0",
+    "reactotron-react-js": "^3.2.1",
+    "reactotron-redux": "^3.1.0",
+    "reactotron-redux-saga": "^4.2.2",
+    "cross-env": "^5.2.0"
   },
   "scripts": {
     "start": "cross-env NODE_ENV=development react-scripts start",
@@ -46,9 +49,6 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.13.0",
-    "prettier": "^1.17.0",
-    "reactotron-react-js": "^3.2.1",
-    "reactotron-redux": "^3.1.0",
-    "reactotron-redux-saga": "^4.2.2"
+    "prettier": "^1.17.0"
   }
 }
