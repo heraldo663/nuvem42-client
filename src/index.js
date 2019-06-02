@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
+import "antd/dist/antd.less";
 
 import "./config/ReactotronConfig";
 import App from "./App";
@@ -10,7 +11,7 @@ import store from "./store";
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />,
+    <App />
   </Provider>,
   document.getElementById("root")
 );

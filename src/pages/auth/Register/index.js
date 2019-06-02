@@ -1,35 +1,99 @@
 import React from "react";
-import { Form, Input } from "@rocketseat/unform";
-import * as Yup from "yup";
+import { Form, Icon, Input, Button, Card, Col, Row, Checkbox } from "antd";
 
-const schema = Yup.object().shape({
-  username: Yup.string().required(),
-  email: Yup.string()
-    .email("Email invalido")
-    .required("Campo obrigatorio"),
-  password: Yup.string()
-    .min(4)
-    .required()
-});
+import { connect } from "react-redux";
+import { Creators as RegisterActions } from "../../../store/ducks/auth/register";
 
-function Register(props) {
-  function handleSubmit(data) {
-    console.log(props, "props");
-    console.log(data);
-  }
+function hasErrors(fieldsError) {
+  return Object.keys(fieldsError).some(field => fieldsError[field]);
+}
+
+function Login(props) {
+  const handleSubmit = e => {
+    e.preventDefault();
+    props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log("Received values of form: ", values);
+      }
+    });
+  };
+
+  const {
+    getFieldDecorator,
+    getFieldsError,
+    getFieldError,
+    isFieldTouched
+  } = props.form;
+  const usernameError = isFieldTouched("username") && getFieldError("username");
+  const passwordError = isFieldTouched("password") && getFieldError("password");
 
   return (
-    <div>
-      <h2>Register</h2>
+    <Row gutter={16} align="middle" justify="center" type="flex">
+      <Col lg={12} xs={24} md={22}>
+        <Card title="Login">
+          <Form layout="vertical" onSubmit={handleSubmit}>
+            <Form.Item
+              validateStatus={usernameError ? "error" : ""}
+              help={usernameError || ""}
+            >
+              {getFieldDecorator("username", {
+                rules: [
+                  { required: true, message: "Please input your username!" }
+                ]
+              })(
+                <Input
+                  prefix={
+                    <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
+                  }
+                  placeholder="Username"
+                />
+              )}
+            </Form.Item>
+            <Form.Item
+              validateStatus={passwordError ? "error" : ""}
+              help={passwordError || ""}
+            >
+              {getFieldDecorator("password", {
+                rules: [
+                  { required: true, message: "Please input your Password!" }
+                ]
+              })(
+                <Input
+                  prefix={
+                    <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
+                  }
+                  type="password"
+                  placeholder="Password"
+                />
+              )}
+            </Form.Item>
 
-      <Form onSubmit={handleSubmit} schema={schema}>
-        <Input name="email" />
-        <Input name="password" type="password" />
-
-        <button type="submit">Sign in</button>
-      </Form>
-    </div>
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                block
+                disabled={hasErrors(getFieldsError())}
+              >
+                Log in
+              </Button>
+            </Form.Item>
+          </Form>
+        </Card>
+      </Col>
+    </Row>
   );
 }
 
-export default Register;
+const mapStateToProps = state => ({
+  registerData: state.register
+});
+
+const mapDispatchToProps = { RegisterActions };
+
+export default Form.create({ name: "Register" })(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Login)
+);
